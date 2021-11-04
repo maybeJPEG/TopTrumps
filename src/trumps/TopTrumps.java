@@ -16,6 +16,7 @@ package trumps;
  * The winner is the player who obtains the whole pack.
  */
 
+
 public interface TopTrumps {
     /**
      * Pick a Deck
