@@ -1,8 +1,7 @@
 package trumps;
 
-import trumps.Impl.ChooseCategoryImpl;
-import trumps.Impl.CompareCategoryImpl;
-import trumps.Impl.DistributeWonDeckImpl;
+import trumps.Exceptions.GameExceptions;
+import trumps.Exceptions.StatusException;
 
 /**
  * Rules:
@@ -31,15 +30,14 @@ public interface TopTrumps {
      * @throws GameExceptions if all Decks are taken
      * @throws StatusException will be called if games hasn't started yet
      */
-    TopTrumpsClients pick(String userName, TopTrumpsClients wantedDeck)
-            throws GameExceptions, StatusException;
+
 
     /**
      * Chooses best Category from DeckOfCards index 0
      * returns Category
      * @throws GameExceptions if no Category isBest
      */
-    ChooseCategoryImpl chooseCategory(int bestCategory)
+    int chooseCategory(int bestCategory)
             throws GameExceptions;
 
     /**
@@ -47,13 +45,12 @@ public interface TopTrumps {
      * returns winner of round
      * @throws GameExceptions if draw
      */
-    CompareCategoryImpl compareCategory(int CategoryAlice, int CategoryBob)
+    int compareCategory(int CategoryAlice, int CategoryBob)
             throws GameExceptions;
 
     /**
      * the played Cards will be put at the end of the players Deck who won this round
      * @throws GameExceptions if no Cards in cardsPlayedList
      */
-    DistributeWonDeckImpl distributeWonDeck()
-            throws GameExceptions;
+
 }

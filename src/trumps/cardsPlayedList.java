@@ -1,5 +1,7 @@
 package trumps;
 
+import trumps.Impl.Card;
+
 import java.util.ArrayList;
 
 public class cardsPlayedList {

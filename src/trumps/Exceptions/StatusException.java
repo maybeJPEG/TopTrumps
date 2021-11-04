@@ -1,4 +1,4 @@
-package trumps;
+package trumps.Exceptions;
 
 /**
  * Used if methos are called in wrong status
