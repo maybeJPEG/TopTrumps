@@ -1,4 +1,7 @@
-package trumps;
+package trumps.Impl;
+
+import trumps.deckAliceList;
+import trumps.deckBobList;
 
 public class DistributeWonDeckImpl {
 

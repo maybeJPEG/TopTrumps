@@ -1,5 +1,9 @@
 package trumps;
 
+import trumps.Impl.ChooseCategoryImpl;
+import trumps.Impl.CompareCategoryImpl;
+import trumps.Impl.DistributeWonDeckImpl;
+
 /**
  * Rules:
  * Each card contains a list of numerical data, and the aim of the gme is to compare

@@ -1,4 +1,9 @@
-package trumps;
+package trumps.Impl;
+
+import trumps.GameExceptions;
+import trumps.StatusException;
+import trumps.TopTrumps;
+import trumps.TopTrumpsClients;
 
 public class TopTrumpsImpl implements TopTrumps {
     @Override

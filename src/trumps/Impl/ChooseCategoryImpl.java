@@ -1,4 +1,7 @@
-package trumps;
+package trumps.Impl;
+
+import trumps.Card;
+import trumps.cardsPlayedList;
 
 public class ChooseCategoryImpl {
 
@@ -7,7 +10,7 @@ public class ChooseCategoryImpl {
 
 
     public void chooseCategory(int bestCategory){
-        Card C = new Card(1,2,3,4);
+        trumps.Card C = new Card(1,2,3,4);
         cardsPlayedList activCards = new cardsPlayedList();
         activCards.addCardsPlayed(C);
         }

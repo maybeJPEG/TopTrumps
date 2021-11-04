@@ -1,6 +1,7 @@
 package trumps;
 import org.junit.Assert;
 import org.junit.Test;
+import trumps.Impl.TopTrumpsImpl;
 
 public class TrumpsTests {
     public static final String Alice = "ALice";

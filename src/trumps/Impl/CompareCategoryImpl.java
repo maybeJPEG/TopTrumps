@@ -1,4 +1,4 @@
-package trumps;
+package trumps.Impl;
 
 public class CompareCategoryImpl {
     public int[]Card;
