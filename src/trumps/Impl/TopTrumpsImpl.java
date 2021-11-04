@@ -3,30 +3,37 @@ package trumps.Impl;
 import trumps.*;
 import trumps.Exceptions.GameExceptions;
 
+import java.util.ArrayList;
+
 public class TopTrumpsImpl implements TopTrumps {
 
     private Player first_player;
     private Player second_player;
+    private Player actual_player;
+    private ArrayList<Card> activeCards = new ArrayList<Card>();
 
     public TopTrumpsImpl(){
         this.first_player = new Player("bob");
         this.second_player = new Player("Alice");
     }
 
+
     @Override
-    public int chooseCategory(int bestCategory) throws GameExceptions {
-
-       // Card C = new Card();
-       // cardsPlayedList activCards = new cardsPlayedList();
-       // activCards.addCardsPlayed(C);
-
-        return 0;
+    public Player start() {
+        //TODO wird gewürfelt, wer als Erster dran ist
+        return null;
     }
 
     @Override
-    public int compareCategory(int CategoryAlice, int CategoryBob) throws GameExceptions {
-            //  public void compareCategory(){
-          //  if (ChooseCategoryImpl.activCards.Length >= 2) {
+    public Card getFirstCard(Player player) {
+        return null;
+    }
+
+    @Override
+    public int compareCategory(int category, Player player) throws GameExceptions {
+        //TODO
+        //public void compareCategory(){
+        //  if (ChooseCategoryImpl.activCards.Length >= 2) {
               /*  CategoryAlice = isBest;
                 for (int i = 0, i <activCards.Length, i++){
                     if (CategoryBob > CategoryAlice) {
@@ -36,6 +43,11 @@ public class TopTrumpsImpl implements TopTrumps {
                 }
             }*/
         return 0;
+    }
+
+    @Override
+    public void giveUp() {
+
     }
 
     //public DistributeWonDeckImpl distributeWonDeck() throws GameExceptions {

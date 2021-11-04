@@ -11,7 +11,7 @@ public class TrumpsTests {
     public static final String Bob = "Bob";
     public static final String Clara = "Clara";
 
-    @Test
+    /*@Test
     private TopTrumps getTopTrumps(){
         return new TopTrumpsImpl();
     }
@@ -63,7 +63,10 @@ public class TrumpsTests {
         tt.pick(Alice, Player.Deck1);
         tt.pick(Bob, Player.Deck2);
         tt.pick(Clara, Player.Deck2);
-    }
+    }*/
+
+    @Test
+    public void
 
     /** test ChooseCategory
      * -kann man alle Kategorien wählen?

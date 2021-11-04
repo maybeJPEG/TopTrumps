@@ -2,6 +2,8 @@ package trumps;
 
 import trumps.Exceptions.GameExceptions;
 import trumps.Exceptions.StatusException;
+import trumps.Impl.Card;
+import trumps.Impl.Player;
 
 /**
  * Rules:
@@ -22,35 +24,10 @@ import trumps.Exceptions.StatusException;
 
 
 public interface TopTrumps {
-    /**
-     * Pick a Deck
-     * @param userName user name
-     * @param wantedDeck user asks for one of the Decks
-     * @return selected Deck
-     * @throws GameExceptions if all Decks are taken
-     * @throws StatusException will be called if games hasn't started yet
-     */
 
-
-    /**
-     * Chooses best Category from DeckOfCards index 0
-     * returns Category
-     * @throws GameExceptions if no Category isBest
-     */
-    int chooseCategory(int bestCategory)
-            throws GameExceptions;
-
-    /**
-     * Compares Category with other players DeckOfCards index 0
-     * returns winner of round
-     * @throws GameExceptions if draw
-     */
-    int compareCategory(int CategoryAlice, int CategoryBob)
-            throws GameExceptions;
-
-    /**
-     * the played Cards will be put at the end of the players Deck who won this round
-     * @throws GameExceptions if no Cards in cardsPlayedList
-     */
+    Player start();
+    Card getFirstCard(Player player);
+    int compareCategory(int category, Player player) throws GameExceptions;
+    void giveUp();
 
 }
