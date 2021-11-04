@@ -17,6 +17,7 @@ package trumps;
  */
 
 
+
 public interface TopTrumps {
     /**
      * Pick a Deck
