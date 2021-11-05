@@ -76,6 +76,12 @@ public class TrumpsTests {
     @Test void goodGetFirstCard1() throws StatusException, GameExceptions{
         TopTrumps tt = this.getTopTrumps();
         Card actual = tt.getFirstCard();
+        Assert.assertEquals(Player.cards[0], actual);
+    }
+
+    @Test void goodGetFirstCard2() throws StatusException, GameExceptions{
+        TopTrumps tt = this.getTopTrumps();
+        Card actual = tt.getFirstCard();
         Assert.assertEquals(Player.cards[0].getOwner, actual.getOwner());
     }
 
