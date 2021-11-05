@@ -40,12 +40,11 @@ public interface TopTrumps {
     /**
      * The active_player, which is the player that is allowed to make a move in the game, gets the first
      * Card on their Deck.
-     * @param player
      * @return Card
      * @throws GameExceptions if no Cards in players Deck.
      * @throws StatusException the Players didn't pick their numbers yet.
      */
-    Card getFirstCard(Player player) throws GameExceptions, StatusException;
+    Card getFirstCard() throws GameExceptions, StatusException;
 
     /**
      * the active_player picks a Category from their Card. The Category will be compared to the same Category

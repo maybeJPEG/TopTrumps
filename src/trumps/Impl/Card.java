@@ -3,11 +3,11 @@ package trumps.Impl;
 public class Card {
 
     private int id;
+    private Player owner;
     private int Category1;
     private int Category2;
     private int Category3;
     private int Category4;
-    private Player owner;
 
     public Card(int id, Player owner){
         this.id = id;
@@ -22,6 +22,8 @@ public class Card {
         //TODO soll zufällige Zahlen zurückgeben
         return 0;
     }
+
+    public Player getOwner() {return owner;}
 
     public int getCategory1() {
         return Category1;

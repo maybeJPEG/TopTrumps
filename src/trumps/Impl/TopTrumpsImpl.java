@@ -10,7 +10,7 @@ public class TopTrumpsImpl implements TopTrumps {
 
     private Player first_player;
     private Player second_player;
-    public Player activ_player;
+    public Player active_player;
     private ArrayList<Card> activeCards = new ArrayList<Card>();
 
     public TopTrumpsImpl(){
@@ -25,7 +25,7 @@ public class TopTrumpsImpl implements TopTrumps {
     }
 
     @Override
-    public Card getFirstCard(Player player) throws GameExceptions, StatusException {
+    public Card getFirstCard() throws GameExceptions, StatusException {
         return null;
     }
 

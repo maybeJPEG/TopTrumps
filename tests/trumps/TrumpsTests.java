@@ -4,6 +4,7 @@ import org.junit.Test;
 import trumps.Exceptions.GameExceptions;
 import trumps.Exceptions.StatusException;
 import trumps.Exceptions.tooManyPlayersException;
+import trumps.Impl.Card;
 import trumps.Impl.Player;
 import trumps.Impl.TopTrumpsImpl;
 
@@ -21,14 +22,14 @@ public class TrumpsTests {
         TopTrumps tt = this.getTopTrumps();
         Player first_player = tt.start("*");
 
-        Assert.assertEquals(TopTrumpsImpl.activ_player, first_player);
+        Assert.assertEquals(TopTrumpsImpl.active_player, first_player);
     }
 
     public void goodstart2() throws StatusException, GameExceptions, tooManyPlayersException {
         TopTrumps tt = this.getTopTrumps();
         Player first_player = tt.start("*");
         Player second_player = tt.start("~");
-        Assert.assertEquals(TopTrumpsImpl.activ_player, first_player);
+        Assert.assertEquals(TopTrumpsImpl.active_player, first_player);
         Assert.assertEquals(TopTrumpsImpl.second_player, second_player);
     }
 
@@ -36,7 +37,7 @@ public class TrumpsTests {
         TopTrumps tt = this.getTopTrumps();
         Player first_player = tt.start("*");
         Player second_player = tt.start("*");
-        Assert.assertEquals(TopTrumpsImpl.activ_player, first_player);
+        Assert.assertEquals(TopTrumpsImpl.active_player, first_player);
         Assert.assertEquals(TopTrumpsImpl.second_player, second_player);
     }
 
@@ -44,7 +45,7 @@ public class TrumpsTests {
         TopTrumps tt = this.getTopTrumps();
         Player second_player = tt.start("*");
         Player first_player = tt.start("*");
-        Assert.assertEquals(TopTrumpsImpl.activ_player, second_player);
+        Assert.assertEquals(TopTrumpsImpl.active_player, second_player);
         Assert.assertEquals(TopTrumpsImpl.first_player, first_player);
     }
 
@@ -54,7 +55,7 @@ public class TrumpsTests {
         //reconsiders
         second_player = tt.start("~");
         Player first_player = tt.start("*");
-        Assert.assertEquals(TopTrumpsImpl.activ_player, first_player);
+        Assert.assertEquals(TopTrumpsImpl.active_player, first_player);
         Assert.assertEquals(TopTrumpsImpl.second_player, second_player);
     }
 
@@ -67,8 +68,16 @@ public class TrumpsTests {
     }
     /**
      * test getFirstCard()
-     *
+     *- ist die Karte die erste Karte von der cards Liste des players
+     * -gameException, wenn auf die Karten des anderen players zugegriffen wird
+     * -statusException, falls die player noch keine cards Listen haben
+     * -statusException, falls keine Karten mehr in der cards Liste eines der player ist
      */
+    @Test void goodGetFirstCard1() throws StatusException, GameExceptions{
+        TopTrumps tt = this.getTopTrumps();
+        Card actual = tt.getFirstCard();
+        Assert.assertEquals(Player.cards[0].getOwner, actual.getOwner());
+    }
 
     /** test CompareCategory()
      * -kann man alle Kategorien wählen?
