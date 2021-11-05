@@ -41,13 +41,13 @@ public class TopTrumpsImpl implements TopTrumps {
                     }
                     return isBest;
                 }
-            }*/if(category == 2){
+            }if(category == 2){
                 activeCards[0].getCategory2();
         }
         switch(category){
             case 1: activeCards.getCategory2[0];
             case 2
-        }
+        }*/
 
 
         return 0;

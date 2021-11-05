@@ -1,9 +1,7 @@
 package trumps;
 import org.junit.Assert;
 import org.junit.Test;
-import trumps.Exceptions.GameExceptions;
-import trumps.Exceptions.StatusException;
-import trumps.Exceptions.tooManyPlayersException;
+import trumps.Exceptions.*;
 import trumps.Impl.Card;
 import trumps.Impl.Player;
 import trumps.Impl.TopTrumpsImpl;
@@ -68,22 +66,44 @@ public class TrumpsTests {
     }
     /**
      * test getFirstCard()
-     *- ist die Karte die erste Karte von der cards Liste des players
-     * -gameException, wenn auf die Karten des anderen players zugegriffen wird
      * -statusException, falls die player noch keine cards Listen haben
-     * -statusException, falls keine Karten mehr in der cards Liste eines der player ist
+     * -MatchException, falls keine Karten mehr in der cards Liste eines der player ist
      */
-    @Test void goodGetFirstCard1() throws StatusException, GameExceptions{
+    @Test
+    void goodGetFirstCard1() throws StatusException, GameExceptions, MatchException, NotYourTurnException {
         TopTrumps tt = this.getTopTrumps();
         Card actual = tt.getFirstCard();
         Assert.assertEquals(Player.cards[0], actual);
     }
 
-    @Test void goodGetFirstCard2() throws StatusException, GameExceptions{
+    @Test
+    void goodGetFirstCard2() throws StatusException, GameExceptions, MatchException, NotYourTurnException {
         TopTrumps tt = this.getTopTrumps();
         Card actual = tt.getFirstCard();
         Assert.assertEquals(Player.cards[0].getOwner, actual.getOwner());
     }
+
+    @Test
+    void goodGetFirstCard3() throws StatusException, GameExceptions, MatchException, NotYourTurnException {
+        TopTrumps tt = this.getTopTrumps();
+        Player actual = tt.getFirstCard().getOwner();
+        Assert.assertEquals(TopTrumpsImpl.active_player, actual);
+    }
+
+    @Test(expected=NotYourTurnException.class)
+    void failureGetFirstCard1() throws StatusException, GameExceptions, MatchException, NotYourTurnException {
+        TopTrumps tt = this.getTopTrumps();
+        Player actual = tt.getFirstCard().getOwner();
+        Assert.assertNotEquals(TopTrumpsImpl.active_player, actual);
+    }
+
+    @Test(expected = MatchException.class)
+    void failureGetfirstCard2() throws StatusException, GameExceptions, MatchException, NotYourTurnException {
+        TopTrumps tt = this.getTopTrumps();
+        tt.getFirstCard();
+        // No more cards in players Deck
+    }
+
 
     /** test CompareCategory()
      * -kann man alle Kategorien wählen?
@@ -93,10 +113,40 @@ public class TrumpsTests {
      *  compareCategory gespielt wird.
      */
     @Test
-    public void goodCompareCategory1() throws StatusException, GameExceptions {
-        TopTrumps ttÜberprüfung = new TopTrumpsImpl();
-        ttÜberprüfung.compareCategory(1,1);
-        int actual = ttÜberprüfung.getCategory1();
+    public void goodCompareCategory1() throws StatusException, GameExceptions, CategoryDoesNotExistException {
+        TopTrumps tt = new TopTrumpsImpl();
+        tt.compareCategory(1,1);
+        int actual = tt.getCategory1();
         Assert.assertEquals(1, actual);
+    }
+
+    @Test
+    public void goodCompareCategory2() throws StatusException, GameExceptions, CategoryDoesNotExistException {
+        TopTrumps tt = new TopTrumpsImpl();
+        tt.compareCategory(2,1);
+        int actual = tt.getCategory2();
+        Assert.assertEquals(2, actual);
+    }
+
+    @Test
+    public void goodCompareCategory3() throws StatusException, GameExceptions, CategoryDoesNotExistException {
+        TopTrumps tt = new TopTrumpsImpl();
+        tt.compareCategory(3,1);
+        int actual = tt.getCategory3();
+        Assert.assertEquals(3, actual);
+    }
+
+    @Test
+    public void goodCompareCategory4() throws StatusException, GameExceptions, CategoryDoesNotExistException {
+        TopTrumps tt = new TopTrumpsImpl();
+        tt.compareCategory(4,1);
+        int actual = tt.getCategory4();
+        Assert.assertEquals(4, actual);
+    }
+
+    @Test(expected = CategoryDoesNotExistExceptions.class)
+    public void failureInvalidCategory() throws StatusException, GameExceptions, CategoryDoesNotExistException {
+        TopTrumps tt = new TopTrumpsImpl();
+        tt.compareCategory(5,1);
     }
 }

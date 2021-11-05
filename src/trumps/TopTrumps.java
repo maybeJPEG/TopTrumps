@@ -1,9 +1,6 @@
 package trumps;
 
-import trumps.Exceptions.DrawException;
-import trumps.Exceptions.GameExceptions;
-import trumps.Exceptions.StatusException;
-import trumps.Exceptions.tooManyPlayersException;
+import trumps.Exceptions.*;
 import trumps.Impl.Card;
 import trumps.Impl.Player;
 
@@ -43,8 +40,10 @@ public interface TopTrumps {
      * @return Card
      * @throws GameExceptions if no Cards in players Deck.
      * @throws StatusException the Players didn't pick their numbers yet.
+     * @throws MatchException if one Player has no more cards in their deck
+     * @throws NotYourTurnException if players that is not active_player tries to take a Card
      */
-    Card getFirstCard() throws GameExceptions, StatusException;
+    Card getFirstCard() throws GameExceptions, StatusException, MatchException, NotYourTurnException;
 
     /**
      * the active_player picks a Category from their Card. The Category will be compared to the same Category
@@ -60,8 +59,10 @@ public interface TopTrumps {
      * @throws GameExceptions
      * @throws StatusException
      * @throws DrawException
+     * @throws CategoryDoesNotExistException, if the chosen Category does ot exist. For Example Player
+     *          puts the wrong number down in the category field (i.e. Numbers > 4 )
      */
-    int compareCategory(int category, int player) throws GameExceptions, StatusException;
+    int compareCategory(int category, int player) throws GameExceptions, StatusException, CategoryDoesNotExistException;
 
     /**
      *  In Case one Player decides to give up all their Cards will be added at the end of the other players
