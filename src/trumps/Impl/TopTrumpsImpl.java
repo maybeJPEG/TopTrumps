@@ -10,7 +10,7 @@ public class TopTrumpsImpl implements TopTrumps {
 
     private Player first_player;
     private Player second_player;
-    private Player actual_player;
+    public Player activ_player;
     private ArrayList<Card> activeCards = new ArrayList<Card>();
 
     public TopTrumpsImpl(){
@@ -20,7 +20,7 @@ public class TopTrumpsImpl implements TopTrumps {
 
 
     @Override
-    public Player start() throws GameExceptions, StatusException {
+    public Player start(String symbol) throws GameExceptions, StatusException {
         return null;
     }
 

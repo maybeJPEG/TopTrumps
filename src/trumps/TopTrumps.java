@@ -3,6 +3,7 @@ package trumps;
 import trumps.Exceptions.DrawException;
 import trumps.Exceptions.GameExceptions;
 import trumps.Exceptions.StatusException;
+import trumps.Exceptions.tooManyPlayersException;
 import trumps.Impl.Card;
 import trumps.Impl.Player;
 
@@ -26,14 +27,15 @@ import trumps.Impl.Player;
 
 public interface TopTrumps {
     /**
-     * Method start: Each Player picks a Number ( 1 or 2). The main Deck gets divided in two Decks and the
-     * Cards will be distributed to the two Players. Player with number one starts the game and will be set
-     * to active_player by the program.
+     * Each Player picks a Symbol which determines if they Play as first_player or second_player.
+     * The main Deck gets divided in two Decks and the Cards will be distributed to the two Players.
+     * first_Player starts the game and will be set to active_player.
      * @return active_player
      * @throws GameExceptions if a third player wants to join.
      * @throws StatusException if the Cards are already distributed.
+     * @throws tooManyPlayersException
      */
-    Player start() throws GameExceptions, StatusException;
+    Player start(String symbol) throws GameExceptions, StatusException, tooManyPlayersException;
 
     /**
      * The active_player, which is the player that is allowed to make a move in the game, gets the first
