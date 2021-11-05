@@ -66,7 +66,12 @@ public class TrumpsTests {
     }*/
 
     @Test
-    public void
+    public void test1() throws StatusException, GameExceptions {
+        TopTrumps ttÜberprüfung = new TopTrumpsImpl();
+        ttÜberprüfung.compareCategory(2,1);
+        int actual = ttÜberprüfung.getCategory();
+        Assert.assertEquals(2, actual);
+    }
 
     /** test ChooseCategory
      * -kann man alle Kategorien wählen?

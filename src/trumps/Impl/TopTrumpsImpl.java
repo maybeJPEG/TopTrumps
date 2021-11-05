@@ -2,6 +2,7 @@ package trumps.Impl;
 
 import trumps.*;
 import trumps.Exceptions.GameExceptions;
+import trumps.Exceptions.StatusException;
 
 import java.util.ArrayList;
 
@@ -19,18 +20,17 @@ public class TopTrumpsImpl implements TopTrumps {
 
 
     @Override
-    public Player start() {
-        //TODO wird gewürfelt, wer als Erster dran ist
+    public Player start() throws GameExceptions, StatusException {
         return null;
     }
 
     @Override
-    public Card getFirstCard(Player player) {
+    public Card getFirstCard(Player player) throws GameExceptions, StatusException {
         return null;
     }
 
     @Override
-    public int compareCategory(int category, Player player) throws GameExceptions {
+    public int compareCategory(int category, int player) throws GameExceptions, StatusException {
         //TODO
         //public void compareCategory(){
         //  if (ChooseCategoryImpl.activCards.Length >= 2) {
@@ -41,14 +41,23 @@ public class TopTrumpsImpl implements TopTrumps {
                     }
                     return isBest;
                 }
-            }*/
+            }*/if(category == 2){
+                activeCards[0].getCategory2();
+        }
+        switch(category){
+            case 1: activeCards.getCategory2[0];
+            case 2
+        }
+
+
         return 0;
     }
 
     @Override
-    public void giveUp() {
-
+    public Player giveUp(int player) {
+        return null;
     }
+
 
     //public DistributeWonDeckImpl distributeWonDeck() throws GameExceptions {
             /*if(CompareCategoryImpl.isBest == AliceCategory){

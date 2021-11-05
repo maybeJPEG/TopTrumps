@@ -1,5 +1,6 @@
 package trumps;
 
+import trumps.Exceptions.DrawException;
 import trumps.Exceptions.GameExceptions;
 import trumps.Exceptions.StatusException;
 import trumps.Impl.Card;
@@ -24,10 +25,49 @@ import trumps.Impl.Player;
 
 
 public interface TopTrumps {
+    /**
+     * Method start: Each Player picks a Number ( 1 or 2). The main Deck gets divided in two Decks and the
+     * Cards will be distributed to the two Players. Player with number one starts the game and will be set
+     * to active_player by the program.
+     * @return active_player
+     * @throws GameExceptions if a third player wants to join.
+     * @throws StatusException if the Cards are already distributed.
+     */
+    Player start() throws GameExceptions, StatusException;
 
-    Player start();
-    Card getFirstCard(Player player);
-    int compareCategory(int category, Player player) throws GameExceptions;
-    void giveUp();
+    /**
+     * The active_player, which is the player that is allowed to make a move in the game, gets the first
+     * Card on their Deck.
+     * @param player
+     * @return Card
+     * @throws GameExceptions if no Cards in players Deck.
+     * @throws StatusException the Players didn't pick their numbers yet.
+     */
+    Card getFirstCard(Player player) throws GameExceptions, StatusException;
+
+    /**
+     * the active_player picks a Category from their Card. The Category will be compared to the same Category
+     * on the other Players Card. The Category with the higher value wins the round. This method will
+     * determine the higher value. In case of a draw the method getFirstCard will be called and the still
+     * active_player will again choose the Category they want to play from the new Card. This will be repeated
+     * until one Category can be determined as higher than the other players Category. All Cards which
+     * Category's have been compared get added to a List called active_Cards and will be added to the end
+     * of the players Deck who had the higher Category.
+     * @param category
+     * @param player
+     * @return player with best Category
+     * @throws GameExceptions
+     * @throws StatusException
+     * @throws DrawException
+     */
+    int compareCategory(int category, int player) throws GameExceptions, StatusException;
+
+    /**
+     *  In Case one Player decides to give up all their Cards will be added at the end of the other players
+     *  deck and the other Player will be determined as winner of the game.
+     * @param player which wants to end the game
+     * @return player that won the game
+     */
+    Player giveUp(int player);
 
 }
