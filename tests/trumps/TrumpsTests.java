@@ -11,16 +11,25 @@ public class TrumpsTests {
     public static final String second_player = "~";
     public static final String third_player = "#";
 
-    @Test
-    private TopTrumps getTopTrumps(){
+    public TopTrumpsImpl getGameInstance(){
         return new TopTrumpsImpl();
     }
 
-    public void goodstart1() throws StatusException, GameExceptions, tooManyPlayersException {
-        TopTrumps tt = this.getTopTrumps();
-        Player first_player = tt.start("*");
+    @Test(expected = WrongNameException.class)
+    private void test_wrong_name() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
+        TopTrumps Game = getGameInstance();
+        Game.start("g");
+    }
 
-        Assert.assertEquals(TopTrumpsImpl.active_player, first_player);
+    @Test()
+    public void goodstart1() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
+        TopTrumps Game = getGameInstance();
+        int player = Game.start("bob");
+        Assert.assertTrue(if_1_or_2(player)); ;
+    }
+
+    private boolean if_1_or_2(int player) {
+        return player==1||player==2;
     }
 
     public void goodstart2() throws StatusException, GameExceptions, tooManyPlayersException {
@@ -58,7 +67,7 @@ public class TrumpsTests {
     }
 
     @Test(expected=tooManyPlayersException.class)
-    public void failureStart3Times() throws StatusException, GameExceptions, tooManyPlayersException {
+    public void failureStart3Times() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
         TopTrumps tt = this.getTopTrumps();
         tt.start("*");
         tt.start("~");
@@ -73,7 +82,7 @@ public class TrumpsTests {
     void goodGetFirstCard1() throws StatusException, GameExceptions, MatchException, NotYourTurnException {
         TopTrumps tt = this.getTopTrumps();
         Card actual = tt.getFirstCard();
-        Assert.assertEquals(Player.cards[0], actual);
+        Assert.assertEquals(Player.getCards[0], actual);
     }
 
     @Test

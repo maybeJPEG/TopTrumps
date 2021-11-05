@@ -32,7 +32,7 @@ public interface TopTrumps {
      * @throws StatusException if the Cards are already distributed.
      * @throws tooManyPlayersException
      */
-    Player start(String symbol) throws GameExceptions, StatusException, tooManyPlayersException;
+    int start(String symbol) throws GameExceptions, StatusException, tooManyPlayersException, WrongNameException;
 
     /**
      * The active_player, which is the player that is allowed to make a move in the game, gets the first

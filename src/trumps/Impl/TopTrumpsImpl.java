@@ -14,14 +14,14 @@ public class TopTrumpsImpl implements TopTrumps {
     private ArrayList<Card> activeCards = new ArrayList<Card>();
 
     public TopTrumpsImpl(){
-        this.first_player = new Player("bob");
-        this.second_player = new Player("Alice");
+        this.first_player = new Player("alice");
+        this.second_player = new Player("bob");
     }
 
 
     @Override
-    public Player start(String symbol) throws GameExceptions, StatusException {
-        return null;
+    public int start(String symbol) throws GameExceptions, StatusException {
+        return 0;
     }
 
     @Override

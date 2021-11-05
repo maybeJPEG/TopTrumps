@@ -19,4 +19,9 @@ public class Player {
             this.cards.add(card);
         }
     }
+
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+
 }
