@@ -27,12 +27,12 @@ public interface TopTrumps {
      * Each Player picks a Symbol which determines if they Play as first_player or second_player.
      * The main Deck gets divided in two Decks and the Cards will be distributed to the two Players.
      * first_Player starts the game and will be set to active_player.
-     * @return active_player
+     * @return active_player (1 is first_player, 2 is second_player)
      * @throws GameExceptions if a third player wants to join.
      * @throws StatusException if the Cards are already distributed.
      * @throws tooManyPlayersException
      */
-    int start(String symbol) throws GameExceptions, StatusException, tooManyPlayersException, WrongNameException;
+    int start(int player) throws GameExceptions, StatusException, tooManyPlayersException, WrongNameException;
 
     /**
      * The active_player, which is the player that is allowed to make a move in the game, gets the first
