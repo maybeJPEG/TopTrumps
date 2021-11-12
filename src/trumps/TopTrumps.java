@@ -43,7 +43,7 @@ public interface TopTrumps {
      * @throws MatchException if one Player has no more cards in their deck
      * @throws NotYourTurnException if players that is not active_player tries to take a Card
      */
-    Card getFirstCard() throws GameExceptions, StatusException, MatchException, NotYourTurnException;
+    int[] getFirstCard(int player) throws GameExceptions, StatusException, MatchException, NotYourTurnException;
 
     /**
      * the active_player picks a Category from their Card. The Category will be compared to the same Category

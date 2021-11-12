@@ -22,7 +22,9 @@ public class Card {
         //TODO soll zufällige Zahlen zurückgeben
         return 0;
     }
-
+    public int[] get_secure_list(){
+        return new int[]{this.Category1, this.Category2, this.Category3, this.Category4};
+    }
     public Player getOwner() {return owner;}
 
     public int getCategory1() {
