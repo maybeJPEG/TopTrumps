@@ -32,7 +32,7 @@ public interface TopTrumps {
      * @throws StatusException if the Cards are already distributed.
      * @throws tooManyPlayersException
      */
-    int start(int player) throws GameExceptions, StatusException, tooManyPlayersException, WrongNameException;
+    int start() throws GameExceptions, StatusException, tooManyPlayersException, WrongNameException, NotExistentPlayerException;
 
     /**
      * The active_player, which is the player that is allowed to make a move in the game, gets the first
@@ -43,7 +43,7 @@ public interface TopTrumps {
      * @throws MatchException if one Player has no more cards in their deck
      * @throws NotYourTurnException if players that is not active_player tries to take a Card
      */
-    int[] getFirstCard(int player) throws GameExceptions, StatusException, MatchException, NotYourTurnException;
+    int[] getFirstCard(int player) throws GameExceptions, StatusException, MatchException, NotYourTurnException, NotExistentPlayerException;
 
     /**
      * the active_player picks a Category from their Card. The Category will be compared to the same Category
@@ -62,7 +62,7 @@ public interface TopTrumps {
      * @throws CategoryDoesNotExistException, if the chosen Category does ot exist. For Example Player
      *          puts the wrong number down in the category field (i.e. Numbers > 4 )
      */
-    int compareCategory(int category, int player) throws GameExceptions, StatusException, CategoryDoesNotExistException;
+    int compareCategory(int category, int player) throws GameExceptions, StatusException, CategoryDoesNotExistException, NotExistentPlayerException, NotYourTurnException;
 
     /**
      *  In Case one Player decides to give up all their Cards will be added at the end of the other players

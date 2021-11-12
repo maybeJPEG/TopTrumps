@@ -1,5 +1,6 @@
 package trumps.Impl;
 
+import trumps.Exceptions.NotExistentValueException;
 import trumps.Impl.Card;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class Player {
     private ArrayList<Card> cards = new ArrayList<Card>();
     private Card actual_card;
 
-    public Player(String name){
+    public Player(String name) throws NotExistentValueException {
         this.name = name;
         this.distributeCards();
         this.update_actual_card();
@@ -31,7 +32,7 @@ public class Player {
     private void delete_actual_card_from_list() {
     }
 
-    private void distributeCards() {
+    private void distributeCards() throws NotExistentValueException {
         for(int i = 0; i < 20; i++){
             Card card = new Card(i, this);
             this.cards.add(card);

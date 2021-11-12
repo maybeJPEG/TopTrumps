@@ -11,30 +11,30 @@ public class TrumpsTests {
     public static final String second_player = "Alice";
     public static final String third_player = "Clara";*/
 
-    public TopTrumpsImpl getTopTrumps(){
+    public TopTrumpsImpl getTopTrumps() throws NotExistentValueException {
         return new TopTrumpsImpl();
     }
 
-    @Test(expected = tooManyPlayersException.class)
+   /* @Test(expected = tooManyPlayersException.class)
     public void tooManyPlayers() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
         TopTrumps Game = getTopTrumps();
         for(int i = 3; i < 1000; i++){
             Game.start(i);
         }
-    }
+    }*/
 
-    @Test(expected = tooManyPlayersException.class)
+    /*@Test(expected = tooManyPlayersException.class)
     public void wrongAmountOfPlayers() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
         TopTrumps Game = getTopTrumps();
         for(int i = -3; i > -1000; i++){
             Game.start(i);
         }
-    }
+    }*/
 
     @Test()
-    public void goodstart1() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
+    public void goodstart1() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException, NotExistentPlayerException, NotExistentValueException {
         TopTrumps Game = getTopTrumps();
-        int player = Game.start(1);
+        int player = Game.start();
         Assert.assertTrue(if_1_or_2(player)); ;
     }
 
@@ -42,31 +42,31 @@ public class TrumpsTests {
         return player==1||player==2;
     }
 
-    public void goodstart2() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
+  /*  public void goodstart2() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
         TopTrumps tt = this.getTopTrumps();
         int first_player = tt.start(1);
         int second_player = tt.start(2);
        // Assert.assertEquals(TopTrumpsImpl.active_player, first_player);
      //   Assert.assertEquals(TopTrumpsImpl.second_player, second_player);
-    }
+    }*/
 
-    public void goodstart3() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
+   /* public void goodstart3() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
         TopTrumps tt = this.getTopTrumps();
         int first_player = tt.start(1);
         int second_player = tt.start(2);
        // Assert.assertEquals(TopTrumpsImpl.active_player, first_player);
        // Assert.assertEquals(TopTrumpsImpl.second_player, second_player);
-    }
+    }*/
 
-    public void goodstart4() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
+    /*public void goodstart4() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
         TopTrumps tt = this.getTopTrumps();
         int second_player = tt.start(1);
         int first_player = tt.start(2);
        // Assert.assertEquals(TopTrumpsImpl.active_player, second_player);
        // Assert.assertEquals(TopTrumpsImpl.first_player, first_player);
-    }
+    }*/
 
-    public void goodstart5() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
+   /* public void goodstart5() throws StatusException, GameExceptions, tooManyPlayersException, WrongNameException {
         TopTrumps tt = this.getTopTrumps();
         int second_player = tt.start(1);
         //reconsiders
@@ -82,7 +82,7 @@ public class TrumpsTests {
         tt.start(1);
         tt.start(2);
         tt.start(2);
-    }
+    }*/
 
     /**
      * test getFirstCard()
@@ -90,7 +90,7 @@ public class TrumpsTests {
      * -MatchException, falls keine Karten mehr in der cards Liste eines der player ist
      */
     @Test
-    public void if_card_list_has_4_categories() throws StatusException, GameExceptions, MatchException, NotYourTurnException {
+    public void if_card_list_has_4_categories() throws StatusException, GameExceptions, MatchException, NotYourTurnException, NotExistentPlayerException, NotExistentValueException {
         TopTrumps tt = this.getTopTrumps();
         int[] actual_card_list = tt.getFirstCard(1);
         Assert.assertEquals(4, actual_card_list.length);
@@ -133,7 +133,7 @@ public class TrumpsTests {
      *  compareCategory gespielt wird.
      */
     @Test
-    public void goodCompareCategory1() throws StatusException, GameExceptions, CategoryDoesNotExistException {
+    public void goodCompareCategory1() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
         TopTrumps tt = new TopTrumpsImpl();
         tt.compareCategory(1,1);
        // int actual = tt.getCategory1();
@@ -141,7 +141,7 @@ public class TrumpsTests {
     }
 
     @Test
-    public void goodCompareCategory2() throws StatusException, GameExceptions, CategoryDoesNotExistException {
+    public void goodCompareCategory2() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
         TopTrumps tt = new TopTrumpsImpl();
         tt.compareCategory(2,1);
       //  int actual = tt.getCategory2();
@@ -149,7 +149,7 @@ public class TrumpsTests {
     }
 
     @Test
-    public void goodCompareCategory3() throws StatusException, GameExceptions, CategoryDoesNotExistException {
+    public void goodCompareCategory3() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
         TopTrumps tt = new TopTrumpsImpl();
         tt.compareCategory(3,1);
      //   int actual = tt.getCategory3();
@@ -157,37 +157,37 @@ public class TrumpsTests {
     }
 
     @Test
-    public void goodCompareCategory4() throws StatusException, GameExceptions, CategoryDoesNotExistException {
+    public void goodCompareCategory4() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
         TopTrumps tt = new TopTrumpsImpl();
         int actual = tt.compareCategory(4,1);
         Assert.assertEquals(4, actual);
     }
 
     @Test(expected = CategoryDoesNotExistException.class)
-    public void failureInvalidCategory() throws StatusException, GameExceptions, CategoryDoesNotExistException {
+    public void failureInvalidCategory() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
         TopTrumps tt = new TopTrumpsImpl();
         tt.compareCategory(5,1);
     }
 
     @Test(expected = StartNotAllowedException.class)
-    public void failureWrongStatusTest() throws StatusException, GameExceptions, WrongNameException, tooManyPlayersException, NotYourTurnException, MatchException {
+    public void failureWrongStatusTest() throws StatusException, GameExceptions, WrongNameException, tooManyPlayersException, NotYourTurnException, MatchException, NotExistentValueException, NotExistentPlayerException {
         TopTrumps tt = new TopTrumpsImpl();
-        tt.start(1);
+        tt.start();
         tt.getFirstCard(1);
-        tt.start(1);
+        tt.start();
     }
 
     @Test(expected = StartNotAllowedException.class)
-    public void failureWrongStatusTest2() throws StatusException, GameExceptions, WrongNameException, tooManyPlayersException, NotYourTurnException, MatchException, CategoryDoesNotExistException {
+    public void failureWrongStatusTest2() throws StatusException, GameExceptions, WrongNameException, tooManyPlayersException, NotYourTurnException, MatchException, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
         TopTrumps tt = new TopTrumpsImpl();
-        tt.start(1);
+        tt.start();
         tt.getFirstCard(1);
         tt.compareCategory(3,1);
-        tt.start(1);
+        tt.start();
     }
 
     @Test(expected = StartNotAllowedException.class)
-    public void failureWrongStatusTest3() throws StatusException, GameExceptions, WrongNameException, tooManyPlayersException, NotYourTurnException, MatchException, CategoryDoesNotExistException {
+    public void failureWrongStatusTest3() throws StatusException, GameExceptions, WrongNameException, tooManyPlayersException, NotYourTurnException, MatchException, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
         TopTrumps tt = new TopTrumpsImpl();
         tt.compareCategory(3,1);
         // start() hasn't been called yet, no players found or decks not distributed yet

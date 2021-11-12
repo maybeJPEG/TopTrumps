@@ -1,5 +1,10 @@
 package trumps.Impl;
 
+import trumps.Exceptions.CategoryDoesNotExistException;
+import trumps.Exceptions.NotExistentValueException;
+
+import java.util.Random;
+
 public class Card {
 
     private int id;
@@ -9,7 +14,7 @@ public class Card {
     private int Category3;
     private int Category4;
 
-    public Card(int id, Player owner){
+    public Card(int id, Player owner) throws NotExistentValueException {
         this.id = id;
         this.owner = owner;
         this.Category1 = random_number();
@@ -18,30 +23,36 @@ public class Card {
         this.Category4 = random_number();
     }
 
-    private int random_number() {
-        //TODO soll zufällige Zahlen zurückgeben
-        return 0;
+    private int random_number() throws NotExistentValueException {
+        int random = 1;
+        Random r = new Random();
+        random = r.nextInt(10);
+        if(random>10 && random <0){
+            throw new NotExistentValueException("Category must be a value between 1 and 10");
+        }
+        return random;
     }
+
     public int[] get_secure_list(){
         return new int[]{this.Category1, this.Category2, this.Category3, this.Category4};
     }
+
     public Player getOwner() {return owner;}
 
-    public int getCategory1() {
-        return Category1;
-    }
+    public int getCategory(int category) throws CategoryDoesNotExistException {
+        switch (category){
+            case 1:
+                return this.Category1;
+            case 2:
+                return this.Category2;
+            case 3:
+                return this.Category3;
+            case 4:
+                return this.Category4;
+            default:
+                throw new CategoryDoesNotExistException();
+        }
 
-    public int getCategory2() {
-        return Category2;
     }
-
-    public int getCategory3() {
-        return Category3;
-    }
-
-    public int getCategory4() {
-        return Category4;
-    }
-
 
 }

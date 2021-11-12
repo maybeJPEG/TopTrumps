@@ -4,6 +4,7 @@ import trumps.*;
 import trumps.Exceptions.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class TopTrumpsImpl implements TopTrumps {
 
@@ -12,76 +13,88 @@ public class TopTrumpsImpl implements TopTrumps {
     public Player active_player;
     private ArrayList<Card> activeCards = new ArrayList<Card>();
 
-    public TopTrumpsImpl(){
+    public TopTrumpsImpl() throws NotExistentValueException {
         this.first_player = new Player("alice");
         this.second_player = new Player("bob");
     }
 
     @Override
-    public int start(int player) throws GameExceptions, StatusException, tooManyPlayersException, WrongNameException {
-        return 0;
+    public int start() throws GameExceptions, StatusException, tooManyPlayersException, WrongNameException, NotExistentPlayerException {
+        determine_active_player();
+        if(determine_active_player()==1){
+            active_player = first_player;
+            return 1;
+        }
+        else{
+            active_player = second_player;
+            return 2;
+        }
+    }
+
+    private int determine_active_player() throws NotExistentPlayerException {
+        int random = 1;
+        Random r = new Random();
+        random = r.nextInt(2);
+        if(random>2 || random <0){
+            throw new NotExistentPlayerException("Must return number 1 for first_player or number 2 for second_player");
+        }
+        return random;
     }
 
     @Override
-    public int[] getFirstCard(int player) throws GameExceptions, StatusException, MatchException, NotYourTurnException {
+    public int[] getFirstCard(int player) throws GameExceptions, StatusException, MatchException, NotYourTurnException, NotExistentPlayerException {
         Player playerOBJ = get_player_from_integer(player);
         Card actual_card = playerOBJ.getActual_card();
         return actual_card.get_secure_list();
     }
 
-    private Player get_player_from_integer(int player) {
-        //if 1 return first object
-        //if 2 return second object
-        return null;
+    private Player get_player_from_integer(int player) throws NotExistentPlayerException{
+        if(player == 1){
+            return first_player;
+        }
+        if(player == 2){
+            return second_player;
+        }
+        else {
+            throw new NotExistentPlayerException("This Player does not exist");
+        }
     }
 
     @Override
-    public int compareCategory(int category, int player) throws GameExceptions, StatusException {
+    public int compareCategory(int category, int player) throws GameExceptions, StatusException, NotExistentPlayerException, NotYourTurnException, CategoryDoesNotExistException {
        validate_actual_player(player);
-       validate_category();
+       validate_category(category);
        compare_cards(category);
-        //TODO
-        //public void compareCategory(){
-        //  if (ChooseCategoryImpl.activCards.Length >= 2) {
-              /*  CategoryAlice = isBest;
-                for (int i = 0, i <activCards.Length, i++){
-                    if (CategoryBob > CategoryAlice) {
-                        CategoryBob = isBest;
-                    }
-                    return isBest;
-                }
-            }if(category == 2){
-                activeCards[0].getCategory2();
-        }
-        switch(category){
-            case 1: activeCards.getCategory2[0];
-            case 2
-        }*/
-
-
         return 0;
     }
 
-    private int compare_cards(int category) {
-        //TODO
-        //this.first_player.get_active_card.get_category(category)
-        //compare to
-        //this.second_player.get_active_card.get_category(category)
+    private void validate_actual_player(int player) throws NotExistentPlayerException, NotYourTurnException {
+        Player playerOBJ = get_player_from_integer(player);
+        if(playerOBJ != this.active_player){
+            throw new NotYourTurnException();
+        }
+    }
 
-        //if 1 won. actual_player = first_player. return -> 1
-        //if 2 won. actual_player = second_player. return -> 2
+    private void validate_category(int category) throws CategoryDoesNotExistException {
+        int categoryOBJ = category;
+        if(categoryOBJ > 5 || categoryOBJ < 1){
+            throw new CategoryDoesNotExistException();
+        }
+    }
+
+    private int compare_cards(int category) throws CategoryDoesNotExistException {
+
+        if(this.first_player.getActual_card().getCategory(category) > this.second_player.getActual_card().getCategory(category)){
+            first_player = active_player;
+            return 1;
+        }
+        if(this.second_player.getActual_card().getCategory(category) > this.first_player.getActual_card().getCategory(category)){
+            second_player = active_player;
+            return 2;
+        }
+
         //if equal. return -> 3
         return 0;
-    }
-
-    private void validate_category() {
-        //TODO
-        //throw exception if category incorrect
-    }
-
-    private void validate_actual_player(int player) {
-        //TODO
-        //check with get_player_from_integer() if playerOBJ equals active_player otherwise throw exception
     }
 
     @Override
@@ -89,19 +102,5 @@ public class TopTrumpsImpl implements TopTrumps {
         return null;
     }
 
-
-    //public DistributeWonDeckImpl distributeWonDeck() throws GameExceptions {
-            /*if(CompareCategoryImpl.isBest == AliceCategory){
-                for(int i = 0; i < activCards.length; i ++){
-                    aliceCards.add(acvtivCards[i]);
-                }
-            }
-            else{
-                for(int j = 0; j < activCards.length; j ++){
-                    bobCards.add(acvtivCards[j]);
-                }
-            }*/
-     //   return null;
-   // }
 }
 
