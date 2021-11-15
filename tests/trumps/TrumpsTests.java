@@ -133,7 +133,7 @@ public class TrumpsTests {
      *  compareCategory gespielt wird.
      */
     @Test
-    public void goodCompareCategory1() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
+    public void goodCompareCategory1() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException, NotYourTurnException, DrawException {
         TopTrumps tt = new TopTrumpsImpl();
         tt.compareCategory(1,1);
        // int actual = tt.getCategory1();
@@ -141,7 +141,7 @@ public class TrumpsTests {
     }
 
     @Test
-    public void goodCompareCategory2() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
+    public void goodCompareCategory2() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException, NotYourTurnException, DrawException {
         TopTrumps tt = new TopTrumpsImpl();
         tt.compareCategory(2,1);
       //  int actual = tt.getCategory2();
@@ -149,7 +149,7 @@ public class TrumpsTests {
     }
 
     @Test
-    public void goodCompareCategory3() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
+    public void goodCompareCategory3() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException, NotYourTurnException, DrawException {
         TopTrumps tt = new TopTrumpsImpl();
         tt.compareCategory(3,1);
      //   int actual = tt.getCategory3();
@@ -157,14 +157,14 @@ public class TrumpsTests {
     }
 
     @Test
-    public void goodCompareCategory4() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
+    public void goodCompareCategory4() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException, NotYourTurnException, DrawException {
         TopTrumps tt = new TopTrumpsImpl();
         int actual = tt.compareCategory(4,1);
         Assert.assertEquals(4, actual);
     }
 
     @Test(expected = CategoryDoesNotExistException.class)
-    public void failureInvalidCategory() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
+    public void failureInvalidCategory() throws StatusException, GameExceptions, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException, NotYourTurnException, DrawException {
         TopTrumps tt = new TopTrumpsImpl();
         tt.compareCategory(5,1);
     }
@@ -178,7 +178,7 @@ public class TrumpsTests {
     }
 
     @Test(expected = StartNotAllowedException.class)
-    public void failureWrongStatusTest2() throws StatusException, GameExceptions, WrongNameException, tooManyPlayersException, NotYourTurnException, MatchException, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
+    public void failureWrongStatusTest2() throws StatusException, GameExceptions, WrongNameException, tooManyPlayersException, NotYourTurnException, MatchException, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException, DrawException {
         TopTrumps tt = new TopTrumpsImpl();
         tt.start();
         tt.getFirstCard(1);
@@ -187,7 +187,7 @@ public class TrumpsTests {
     }
 
     @Test(expected = StartNotAllowedException.class)
-    public void failureWrongStatusTest3() throws StatusException, GameExceptions, WrongNameException, tooManyPlayersException, NotYourTurnException, MatchException, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException {
+    public void failureWrongStatusTest3() throws StatusException, GameExceptions, WrongNameException, tooManyPlayersException, NotYourTurnException, MatchException, CategoryDoesNotExistException, NotExistentValueException, NotExistentPlayerException, DrawException {
         TopTrumps tt = new TopTrumpsImpl();
         tt.compareCategory(3,1);
         // start() hasn't been called yet, no players found or decks not distributed yet

@@ -12,6 +12,7 @@ public class TopTrumpsImpl implements TopTrumps {
     private Player second_player;
     public Player active_player;
     private ArrayList<Card> activeCards = new ArrayList<Card>();
+    private Card actual_card;
 
     public TopTrumpsImpl() throws NotExistentValueException {
         this.first_player = new Player("alice");
@@ -44,6 +45,7 @@ public class TopTrumpsImpl implements TopTrumps {
     @Override
     public int[] getFirstCard(int player) throws GameExceptions, StatusException, MatchException, NotYourTurnException, NotExistentPlayerException {
         Player playerOBJ = get_player_from_integer(player);
+        add_active_cards();
         Card actual_card = playerOBJ.getActual_card();
         return actual_card.get_secure_list();
     }
@@ -61,7 +63,7 @@ public class TopTrumpsImpl implements TopTrumps {
     }
 
     @Override
-    public int compareCategory(int category, int player) throws GameExceptions, StatusException, NotExistentPlayerException, NotYourTurnException, CategoryDoesNotExistException {
+    public int compareCategory(int category, int player) throws GameExceptions, StatusException, NotExistentPlayerException, NotYourTurnException, CategoryDoesNotExistException, DrawException {
        validate_actual_player(player);
        validate_category(category);
        compare_cards(category);
@@ -82,25 +84,56 @@ public class TopTrumpsImpl implements TopTrumps {
         }
     }
 
-    private int compare_cards(int category) throws CategoryDoesNotExistException {
+    private int compare_cards(int category) throws CategoryDoesNotExistException, DrawException {
 
         if(this.first_player.getActual_card().getCategory(category) > this.second_player.getActual_card().getCategory(category)){
+            for(int i = 0; i < activeCards.size(); i++ ){
+                this.first_player.getCards().add(activeCards.get(i));
+                activeCards.remove(i);
+            }
             first_player = active_player;
             return 1;
         }
         if(this.second_player.getActual_card().getCategory(category) > this.first_player.getActual_card().getCategory(category)){
+            for(int j = 0; j < activeCards.size(); j++){
+                this.second_player.getCards().add(activeCards.get(j));
+                activeCards.remove(j);
+            }
             second_player = active_player;
             return 2;
         }
-
+        //TODO
         //if equal. return -> 3
+        if(this.first_player.getActual_card().getCategory(category) == this.second_player.getActual_card().getCategory(category)){
+            add_active_cards();
+            throw new DrawException();
+        }
         return 0;
+    }
+    private void add_active_cards(){
+        delete_actual_card_from_players_cards();
+        update_actual_card();
+        place_actual_card_in_activeCards();
+    }
+
+    private void delete_actual_card_from_players_cards() {
+        this.first_player.getCards().remove(0);
+        this.second_player.getCards().remove(0);
+    }
+
+    private void update_actual_card(){
+        this.actual_card = this.first_player.getCards().get(0);
+        this.actual_card = this.second_player.getCards().get(0);
+    }
+
+    private void place_actual_card_in_activeCards() {
+        activeCards.add(this.first_player.getActual_card());
+        activeCards.add(this.second_player.getActual_card());
     }
 
     @Override
     public Player giveUp(int player) {
         return null;
     }
-
 }
 

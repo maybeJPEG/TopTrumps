@@ -62,7 +62,7 @@ public interface TopTrumps {
      * @throws CategoryDoesNotExistException, if the chosen Category does ot exist. For Example Player
      *          puts the wrong number down in the category field (i.e. Numbers > 4 )
      */
-    int compareCategory(int category, int player) throws GameExceptions, StatusException, CategoryDoesNotExistException, NotExistentPlayerException, NotYourTurnException;
+    int compareCategory(int category, int player) throws GameExceptions, StatusException, CategoryDoesNotExistException, NotExistentPlayerException, NotYourTurnException, DrawException;
 
     /**
      *  In Case one Player decides to give up all their Cards will be added at the end of the other players
